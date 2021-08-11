@@ -1,28 +1,25 @@
 import React from "react";
 import Product from "./Product";
+import {Switch,Route} from "react-router-dom";
+import Home from "./Home";
+import AboutUs from "./AboutUs";
 export default class Main extends React.Component{
     render() {
-        const ls = [
-            {
-                name:"Sp 1",
-                price:100
-            },
-            {
-                name:"Sp 2",
-                price:200
-            }
-        ];
-        return <div>
-            <h1>Danh sách sản phẩm</h1>
-            <ul>
-                {
-                  ls.map((e,k)=>{
-                      return  <li key={k}>
-                          <Product name={e.name} price={e.price}/>
-                      </li>
-                  })
-                }
-            </ul>
-        </div>
+        return (
+            <div className="content-wrapper">
+            <section className="content">
+                <div className="container-fluid">
+                    <Switch>
+                        <Route path="/" exact>
+                            <Home/>
+                        </Route>
+                        <Route path="/about-us" exact>
+                            <AboutUs/>
+                        </Route>
+                    </Switch>
+                </div>
+            </section>
+            </div>
+        )
     }
 }
