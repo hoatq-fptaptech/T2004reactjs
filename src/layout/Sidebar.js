@@ -1,7 +1,24 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import axios from 'axios'
 export default class Sidebar extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            categories:[]
+        }
+    }
+    componentDidMount() {
+        axios.get("https://foodgroup.herokuapp.com/api/menu")
+            .then(rs=>{
+                this.setState({
+                    categories:rs.data.data
+                })
+            })
+    }
+
     render() {
+        const categories = this.state.categories;
         return (
             <aside className="main-sidebar sidebar-dark-primary elevation-4">
                 <Link to="/" className="brand-link">
@@ -37,18 +54,16 @@ export default class Sidebar extends React.Component{
                                     <p>Home</p>
                                 </Link>
                             </li>
-                            <li className="nav-item">
-                                <Link to="/about-us" className="nav-link">
-                                    <i className="far fa-circle nav-icon"></i>
-                                    <p>About Us</p>
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <a href="#" className="nav-link">
-                                    <i className="far fa-circle nav-icon"></i>
-                                    <p>Informational</p>
-                                </a>
-                            </li>
+                            {
+                                categories.map((e,k)=>{
+                                    return <li key={k} className="nav-item">
+                                        <Link to={"/category/"+e.id} className="nav-link">
+                                            <i className="far fa-circle nav-icon"></i>
+                                            <p>{e.name}</p>
+                                        </Link>
+                                    </li>
+                                })
+                            }
                         </ul>
                     </nav>
                 </div>

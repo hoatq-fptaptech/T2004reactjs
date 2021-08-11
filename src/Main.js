@@ -2,7 +2,7 @@ import React from "react";
 import Product from "./Product";
 import {Switch,Route} from "react-router-dom";
 import Home from "./Home";
-import AboutUs from "./AboutUs";
+import Category from "./Category"
 export default class Main extends React.Component{
     render() {
         return (
@@ -13,8 +13,11 @@ export default class Main extends React.Component{
                         <Route path="/" exact>
                             <Home/>
                         </Route>
-                        <Route path="/about-us" exact>
-                            <AboutUs/>
+                        <Route path="/category/:id" exact>
+                            <Category />
+                        </Route>
+                        <Route path="/product/:id" exact>
+                            <Product/>
                         </Route>
                     </Switch>
                 </div>
