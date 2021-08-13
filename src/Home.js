@@ -1,11 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-export default class Home extends React.Component{
+import {connect} from "react-redux";
+class Home extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
             products:[]
         }
+      //  this.addToCart = this.addToCart.bind(this);
     }
     componentDidMount() { // sẽ thực thi sau khi render lần đầu tiên
         // lấy dữ liệu từ api để nạp cho products trong state
@@ -16,7 +18,9 @@ export default class Home extends React.Component{
                 })
             })
     }
-
+    addToCart(p){
+        this.props.addCart(p);
+    }
     render() {
         const products = this.state.products;
         return (
@@ -85,6 +89,7 @@ export default class Home extends React.Component{
                                 <th>Image</th>
                                 <th>Description</th>
                                 <th>Price</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -96,6 +101,7 @@ export default class Home extends React.Component{
                                     <td><img src={e.image} width={50}/></td>
                                     <td>{e.description}</td>
                                     <td>{e.price}</td>
+                                    <td><button type="button" onClick={this.addToCart.bind(this,e)} className="btn btn-danger">Add Cart</button></td>
                                 </tr>
                             })
                         }
@@ -107,3 +113,11 @@ export default class Home extends React.Component{
         )
     }
 }
+const mapDispatchToProps = (dispatch)=>{
+    return {
+        addCart: p =>{
+            dispatch({type:"add_cart",product:p});
+        }
+    }
+}
+export default connect(null,mapDispatchToProps)(Home);

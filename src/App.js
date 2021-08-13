@@ -5,7 +5,12 @@ import Main from "./Main";
 import Footer from "./Footer";
 import {BrowserRouter} from "react-router-dom";
 import Sidebar from './layout/Sidebar'
+import {connect} from "react-redux";
 class App extends React.Component{
+  componentDidMount() {
+        this.props.loadCart();
+  }
+
   render(){
     return (
         <BrowserRouter>
@@ -18,4 +23,11 @@ class App extends React.Component{
     );
   }
 }
-export default App;
+const mapDispatchToProps = (dispatch)=>{
+    return {
+        loadCart: () =>{
+            dispatch({type:"load_cart"});
+        }
+    }
+}
+export default connect(null,mapDispatchToProps)(App);
