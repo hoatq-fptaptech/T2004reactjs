@@ -9,16 +9,16 @@ export default class Sidebar extends React.Component{
         }
     }
     componentDidMount() {
-        axios.get("https://foodgroup.herokuapp.com/api/menu")
-            .then(rs=>{
-                this.setState({
-                    categories:rs.data.data
-                })
-            })
+        // axios.get("https://foodgroup.herokuapp.com/api/menu")
+        //     .then(rs=>{
+        //         this.setState({
+        //             categories:rs.data.data
+        //         })
+        //     })
     }
 
     render() {
-        const categories = this.state.categories;
+        // const categories = this.state.categories;
         return (
             <aside className="main-sidebar sidebar-dark-primary elevation-4">
                 <Link to="/" className="brand-link">
@@ -54,16 +54,22 @@ export default class Sidebar extends React.Component{
                                     <p>Home</p>
                                 </Link>
                             </li>
-                            {
-                                categories.map((e,k)=>{
-                                    return <li key={k} className="nav-item">
-                                        <Link to={"/category/"+e.id} className="nav-link">
-                                            <i className="far fa-circle nav-icon"></i>
-                                            <p>{e.name}</p>
-                                        </Link>
-                                    </li>
-                                })
-                            }
+                            <li className="nav-item">
+                                <Link to="/categories" className="nav-link">
+                                    <i className="far fa-circle nav-icon"></i>
+                                    <p>Categories</p>
+                                </Link>
+                            </li>
+                            {/*{*/}
+                            {/*    categories.map((e,k)=>{*/}
+                            {/*        return <li key={k} className="nav-item">*/}
+                            {/*            <Link to={"/category/"+e.id} className="nav-link">*/}
+                            {/*                <i className="far fa-circle nav-icon"></i>*/}
+                            {/*                <p>{e.name}</p>*/}
+                            {/*            </Link>*/}
+                            {/*        </li>*/}
+                            {/*    })*/}
+                            {/*}*/}
                         </ul>
                     </nav>
                 </div>
